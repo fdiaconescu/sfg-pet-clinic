@@ -32,4 +32,22 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <developerConnection>scm:git:https://github.com/fdiaconescu/sfg-pet-clinic.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+
 </project>
