@@ -1,10 +1,7 @@
 package guru.springframework.sfgpetclinic.bootstrap;
 
 import guru.springframework.sfgpetclinic.model.*;
-import guru.springframework.sfgpetclinic.services.OwnerService;
-import guru.springframework.sfgpetclinic.services.PetTypeService;
-import guru.springframework.sfgpetclinic.services.SpecialityService;
-import guru.springframework.sfgpetclinic.services.VetService;
+import guru.springframework.sfgpetclinic.services.*;
 import guru.springframework.sfgpetclinic.services.map.OwnerServiceMap;
 import guru.springframework.sfgpetclinic.services.map.VetServiceMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +17,16 @@ public class DataLoader implements CommandLineRunner {
    private final VetService vetService;
    private final PetTypeService petTypeService;
    private final SpecialityService specialityService;
+   private final VisitService visitService;
 
 
    public DataLoader(OwnerService ownerService, VetService vetService,
-                     PetTypeService petTypeService, SpecialityService specialityService) {
+                     PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
       this.ownerService = ownerService;
       this.vetService = vetService;
       this.petTypeService = petTypeService;
       this.specialityService = specialityService;
+      this.visitService = visitService;
    }
 
    @Override
@@ -96,6 +95,13 @@ public class DataLoader implements CommandLineRunner {
       ownerService.save(owner2);
 
       System.out.println("Loaded 2 owners...............");
+
+      Visit catVisit = new Visit();
+      catVisit.setPet(catPet);
+      catVisit.setDate(LocalDate.now());
+      catVisit.setDescription("Snizy cat");
+
+      visitService.save(catVisit);
 
       Vet vet1 = new Vet();
       vet1.setFirstName("FirstVet1");
